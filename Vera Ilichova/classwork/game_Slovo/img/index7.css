@@ -1,0 +1,40 @@
+*{
+    box-sizing: border-box;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+}
+div>h1,
+h1+p{
+    text-align: center;
+     color: rgb(255, 0, 0);
+}
+#imgWrapper{
+    width: 350px;
+    margin: 10px auto;
+}
+#imgWrapper>img { 
+    width: 100%;
+    }
+    #word{
+        font-size: 54px;
+        text-align:center;
+    }
+    .user-input{
+        text-align: center;
+        padding: 10px 0;
+    }
+    #letter{
+        color:purple;
+        padding: 10px;
+        cursor: pointer; 
+
+    }
+    #btn{
+
+border-radius: 10px;
+cursor: pointer;
+padding: 10px;
+    }
+    #btn:hover{
+        background-color: blue;
+        color:aliceblue;
+    }
