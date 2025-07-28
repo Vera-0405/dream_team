@@ -83,3 +83,29 @@ function getWinn() {
   });
   return;
 }
+// // выбираем и проверяем тэги span на выигрыш
+// function getWinn() {
+//   const spanElementList = document.querySelectorAll("span");
+//   console.log(spanElementList);
+//   spanElementArr = [...spanElementList];
+//   const isAllLetterDiscovered = spanElementArr.every((span) => {
+//     if (span.textContent !== " _ ") {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   });
+
+//   if (isAllLetterDiscovered) {
+//      alert("Вы выиграли!!!");
+//   } else {
+//       imageNumber++;
+//       img.src = `./${imageNumber}.png`;
+//       console.log(inputValue, imageNumber);
+//       if (imageNumber > 5) {
+//         alert("Вы проиграли");
+//       }
+//     }
+
+//   return;
+// }
