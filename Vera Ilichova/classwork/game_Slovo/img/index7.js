@@ -1,5 +1,6 @@
 //const { Children } = require("react");
-
+//function getSlovo(){
+let clickValue = 0;
 let letterWordArr = [];
 let inputValue = "";
 let imageNumber = 1;
@@ -8,7 +9,17 @@ const word = document.getElementById("word");
 console.log(word);
 const inputLetter = document.getElementById("myInput");
 const button = document.getElementById("btn");
+const button2 = document.getElementById("btn2");
 // обработчики
+button2.addEventListener("click", () => {
+  clickValue++;
+  if (clickValue === 1) {
+    imageNumber = 1;
+    letterWordArr = [];
+    img.src = `./${imageNumber}.png`;
+    getWord(letterWordArr);
+  }
+});
 inputLetter.addEventListener("input", () => {
   inputValue = inputLetter.value;
   console.log(inputValue);
@@ -18,8 +29,9 @@ button.addEventListener("click", () => {
   getLetter();
 });
 button.addEventListener("click", () => {
- getWinn;
+  getWinn();
 });
+
 //готовим массив букв из слова
 function getWord() {
   const wordArr = [
@@ -46,66 +58,57 @@ function getWord() {
   });
 }
 
-getWord(letterWordArr);
-console.log(letterWordArr);
+//getWord(letterWordArr);
+//console.log(letterWordArr);
 
 //проверяем введенную букву
 function getLetter() {
+  let trueinputLetter = false;
   if (typeof inputValue === "string" && inputValue !== "") {
     console.log(inputValue);
     for (let i = 0; i < letterWordArr.length; i++) {
       if (letterWordArr[i] === inputValue) {
-        console.log(letterWordArr[i], i);
+        trueinputLetter = true;
         document.getElementById("word").children[i].textContent = inputValue;
       }
     }
-
-    return;
   }
+  if (trueinputLetter === false) {
+    imageNumber++;
+    console.log(imageNumber);
+    img.src = `./${imageNumber}.png`;
+  }
+  return;
 }
 
 // выбираем и проверяем тэги span на выигрыш
 function getWinn() {
   const spanElementList = document.querySelectorAll("span");
   console.log(spanElementList);
-  spanElementArr = [...spanElementList];
-  spanElementArr.every(() => {
-    if (spanElementArr.textContent !== " _ ") {
-      alert("Вы выиграли!!!");
+  const spanElementArr = [...spanElementList];
+  console.log(spanElementArr);
+  const isAllLetterDiscovered = spanElementArr.every((span) => {
+    if (span.textContent !== " _ ") {
+      return true;
     } else {
-      imageNumber++;
-      img.src = `./${imageNumber}.png`;
-      console.log(inputValue, imageNumber);
-      if (imageNumber > 5) {
-        alert("Вы проиграли");
-      }
+      return false;
     }
   });
+  if (isAllLetterDiscovered) {
+    alert("Вы выиграли!!!");
+    inputLetter.value = "";
+    clickValue = 0;// начало игры
+     for (let i=0; i < spanElementArr.length; i++)
+    {document.querySelector("span").remove();
+  }} else {
+    if (imageNumber >= 5) {
+      alert("Вы проиграли");
+      inputLetter.value = "";
+      clickValue = 0;// начало игры
+      for (let i = 0; i < spanElementArr.length; i++) {
+        document.querySelector("span").remove();
+      }
+    }
+  }
   return;
 }
-// // выбираем и проверяем тэги span на выигрыш
-// function getWinn() {
-//   const spanElementList = document.querySelectorAll("span");
-//   console.log(spanElementList);
-//   spanElementArr = [...spanElementList];
-//   const isAllLetterDiscovered = spanElementArr.every((span) => {
-//     if (span.textContent !== " _ ") {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   });
-
-//   if (isAllLetterDiscovered) {
-//      alert("Вы выиграли!!!");
-//   } else {
-//       imageNumber++;
-//       img.src = `./${imageNumber}.png`;
-//       console.log(inputValue, imageNumber);
-//       if (imageNumber > 5) {
-//         alert("Вы проиграли");
-//       }
-//     }
-
-//   return;
-// }

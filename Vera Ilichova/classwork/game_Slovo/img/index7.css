@@ -6,6 +6,11 @@ div>h1,
 h1+p{
     text-align: center;
      color: rgb(255, 0, 0);
+    
+}
+h3{
+    text-align: center;
+     color: #ff0059;
 }
 #imgWrapper{
     width: 350px;
@@ -37,8 +42,50 @@ h1+p{
 border-radius: 10px;
 cursor: pointer;
 padding: 10px;
+animation: turning 2s ease-out 1s infinite alternate
     }
     #btn:hover{
         background-color: blue;
         color:aliceblue;
+        animation-play-state: paused;
     }
+    #btn2{
+
+border-radius: 10px;
+cursor: pointer;
+padding: 10px;
+
+    }
+    #btn2:hover{
+        background-color: rgb(0, 255, 183);
+        color:aliceblue;
+        animation-play-state: paused;
+        
+    }
+    
+           
+        
+        @keyframes turning {
+        0% {
+           border-radius: 50 0 0 0; 
+           transform: rotate(0deg);
+        }
+        
+        25% {
+           border-radius: 50 0 0 0; 
+           transform: rotate(45deg);
+        }
+        50% {
+           border-radius: 50 50 0 0; 
+           transform: rotate(90deg);
+        }
+        75% {
+           border-radius: 50 50 50 0; 
+           transform: rotate(135deg);
+        }
+        100% {
+           border-radius: 50 50 50 50; 
+           transform: rotate(180deg);
+        }
+    }
+    
