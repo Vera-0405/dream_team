@@ -1,5 +1,6 @@
 //const { Children } = require("react");
-//function getSlovo(){
+//game_Slovo
+
 let clickValue = 0;
 let letterWordArr = [];
 let inputValue = "";
@@ -21,15 +22,15 @@ button2.addEventListener("click", () => {
   }
 });
 inputLetter.addEventListener("input", () => {
-  inputValue = inputLetter.value;
-  console.log(inputValue);
+if(clickValue===1)  {inputValue = inputLetter.value;
+   console.log(clickValue);}  
 });
 
-button.addEventListener("click", () => {
-  getLetter();
+button.addEventListener("click", () => { if(clickValue===1) 
+  {getLetter();}
 });
-button.addEventListener("click", () => {
-  getWinn();
+button.addEventListener("click", () => { if(clickValue===1)
+    {setTimeout(getWinn, 500);}
 });
 
 //готовим массив букв из слова
@@ -41,10 +42,14 @@ function getWord() {
     "Даниэль",
     "Анастасия",
     "Вера",
+    "Валерчик",
+    "Аристарх",
+    "Митрофан",
+    "Фекла"
   ];
-  const wordArrNumer = Math.floor(Math.random() * wordArr.length);
+  const wordArrNumber = Math.floor(Math.random() * wordArr.length);
   //console.log(wordArrNumer,wordArr[wordArrNumer]);
-  const myWord = wordArr[wordArrNumer];
+  const myWord = wordArr[wordArrNumber];
   letterWordArr = [...myWord];
   console.log(letterWordArr);
   letterWordArr.forEach(() => {
@@ -96,15 +101,15 @@ function getWinn() {
   });
   if (isAllLetterDiscovered) {
     alert("Вы выиграли!!!");
-    inputLetter.value = "";
-    clickValue = 0;// начало игры
+    //inputLetter.value = "";
+    clickValue = 0;// начало  новой игры
      for (let i=0; i < spanElementArr.length; i++)
     {document.querySelector("span").remove();
   }} else {
     if (imageNumber >= 5) {
-      alert("Вы проиграли");
-      inputLetter.value = "";
-      clickValue = 0;// начало игры
+      alert(`Вы проиграли Имя : ${letterWordArr}`);
+      //inputLetter.value = "";
+      clickValue = 0;// начало новой игры
       for (let i = 0; i < spanElementArr.length; i++) {
         document.querySelector("span").remove();
       }
