@@ -1,7 +1,7 @@
 //const { Children } = require("react");
 //game_Slovo
 
-let clickValue = 0;
+let clickValue = 0; // начало новой игры
 let letterWordArr = [];
 let inputValue = "";
 let imageNumber = 1;
@@ -14,23 +14,38 @@ const button2 = document.getElementById("btn2");
 // обработчики
 button2.addEventListener("click", () => {
   clickValue++;
+  console.log(clickValue);
   if (clickValue === 1) {
     imageNumber = 1;
     letterWordArr = [];
     img.src = `./${imageNumber}.png`;
     getWord(letterWordArr);
+  } else {
+    clickValue--;
   }
 });
 inputLetter.addEventListener("input", () => {
-if(clickValue===1)  {inputValue = inputLetter.value;
-   console.log(clickValue);}  
+  if (clickValue === 1) {
+    inputValue = inputLetter.value;
+  } else {
+    clickValue = 0;
+    inputLetter.value = "";
+  }
 });
 
-button.addEventListener("click", () => { if(clickValue===1) 
-  {getLetter();}
+button.addEventListener("click", () => {
+  if (clickValue === 1) {
+    getLetter();
+  } else {
+    clickValue = 0;
+  }
 });
-button.addEventListener("click", () => { if(clickValue===1)
-    {setTimeout(getWinn, 500);}
+button.addEventListener("click", () => {
+  if (clickValue === 1) {
+    setTimeout(getWinn, 500);
+  } else {
+    clickValue = 0;
+  }
 });
 
 //готовим массив букв из слова
@@ -45,7 +60,7 @@ function getWord() {
     "Валерчик",
     "Аристарх",
     "Митрофан",
-    "Фекла"
+    "Фекла",
   ];
   const wordArrNumber = Math.floor(Math.random() * wordArr.length);
   //console.log(wordArrNumer,wordArr[wordArrNumer]);
@@ -62,9 +77,6 @@ function getWord() {
     return;
   });
 }
-
-//getWord(letterWordArr);
-//console.log(letterWordArr);
 
 //проверяем введенную букву
 function getLetter() {
@@ -101,15 +113,14 @@ function getWinn() {
   });
   if (isAllLetterDiscovered) {
     alert("Вы выиграли!!!");
-    //inputLetter.value = "";
-    clickValue = 0;// начало  новой игры
-     for (let i=0; i < spanElementArr.length; i++)
-    {document.querySelector("span").remove();
-  }} else {
+    clickValue = 0; // начало  новой игры
+    for (let i = 0; i < spanElementArr.length; i++) {
+      document.querySelector("span").remove();
+    }
+  } else {
     if (imageNumber >= 5) {
       alert(`Вы проиграли Имя : ${letterWordArr}`);
-      //inputLetter.value = "";
-      clickValue = 0;// начало новой игры
+      clickValue = 0; // начало новой игры
       for (let i = 0; i < spanElementArr.length; i++) {
         document.querySelector("span").remove();
       }
