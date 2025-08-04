@@ -112,15 +112,15 @@ function getWinn() {
     }
   });
   if (isAllLetterDiscovered) {
-    alert("Вы выиграли!!!");
-    clickValue = 0; // начало  новой игры
+    alert("Вы выиграли!!!"); 
+    inputLetter.value = ""; clickValue = 0; // начало  новой игры
     for (let i = 0; i < spanElementArr.length; i++) {
       document.querySelector("span").remove();
     }
   } else {
     if (imageNumber >= 5) {
       alert(`Вы проиграли Имя : ${letterWordArr}`);
-      clickValue = 0; // начало новой игры
+      inputLetter.value = "";clickValue = 0; // начало новой игры
       for (let i = 0; i < spanElementArr.length; i++) {
         document.querySelector("span").remove();
       }
