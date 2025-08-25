@@ -9,56 +9,76 @@ function getPizza() {
   let zakazSousArr = []; // начало заказа
   let inputValue = "";
   let inputElement = "";
-  let imageNumber = 1; let sum =0;
+  let imageNumber = 1;
+  let sum = 0;
+  let clickIndex=0;
+  let totalPriceArr=[];
   const zakazPriceArr = [];
   const img = document.querySelector("#imgPizza>img");
   const myZakaz = document.getElementById("zakaz");
   console.log(`Формирование заказа`);
   const button = document.getElementById("btn");
-  // обработчики
+  // DOM
   console.dir(document);
-  const b = myZakaz.children[0];
+  const b = myZakaz.children[0]; 
   const ing1 = b.nextElementSibling;
   const ing2 = ing1.nextElementSibling;
   const s = ing2.nextElementSibling;
-
+// обработчики
   b.addEventListener("click", (event) => {
     clickValueBase++;
     let selectedElement = event.target;
     inputValue = event.target.innerText;
-    inputValue = event.target.innerText;
     inputElement = b.children[0].innerText;
-    if (clickValueBase === 1) {
+    if (inputValue === inputElement){clickValueBase--;}
+    else if (clickValueBase === 1) {
       zakazBaseArr.push(inputValue);
-      selectedElement.style.color = `red`;
+      selectedElement.style.color = "red";
       console.log(inputElement, zakazBaseArr);
+    const parent = document.getElementById("zakazFormation");
+    console.log(parent);
+    ul = document.createElement("ul");
+    ul.textContent = inputValue;
+       parent.append(ul);
+    console.log(ul);
     }
   });
   ing1.addEventListener("click", (event) => {
     clickValueIng1++;
     let selectedElement = event.target;
     inputValue = event.target.innerText;
-    inputValue = event.target.innerText;
     inputElement = ing1.children[0].innerText;
-    if (clickValueIng1 <= 2) {
+    if (inputValue === inputElement){clickValueIng1--;}
+    else if (clickValueIng1 <= 2) {
       zakazIngredient1Arr.push(inputValue);
-      selectedElement.style.color = `red`;
+      selectedElement.style.color = "red";
       console.log(inputElement, zakazIngredient1Arr);
+      const parent = document.getElementById("zakazFormation");
+    console.log(parent);
+    ul = document.createElement("ul");
+    ul.textContent = inputValue;
+       parent.append(ul);
+    console.log(ul);
     }
-  });
-  ing2.addEventListener("click", (event) => {
+  })
+  ;
+    ing2.addEventListener("click", (event) => {
     clickValueIng2++;
     let selectedElement = event.target;
     inputValue = event.target.innerText;
-    inputValue = event.target.innerText;
-    clickValue = 0;
-    inputElement = ing2.children[0].innerText;
-    if (clickValueIng2 <= 2) {
+     inputElement = ing2.children[0].innerText;
+    if (inputValue === inputElement){clickValueIng2--;}
+    else if (clickValueIng2 <= 2) {
       zakazIngredient2Arr.push(inputValue);
       // myElement.style.classlist.add (`active`);
-      selectedElement.style.color = `red`;
-
+      selectedElement.style.color = "red";
       console.log(inputElement, zakazIngredient2Arr);
+      const parent = document.getElementById("zakazFormation");
+    console.log(parent);
+    ul = document.createElement("ul");
+    ul.textContent = inputValue;
+       parent.append(ul);
+    console.log(ul);
     }
   });
   s.addEventListener("click", (event) => {
@@ -66,10 +86,17 @@ function getPizza() {
     let selectedElement = event.target;
     inputValue = event.target.innerText;
     inputElement = s.children[0].innerText;
-    if (clickValueSous === 1) {
+    if (inputValue === inputElement){clickValueSous--;}
+    else if (clickValueSous === 1) {
       zakazSousArr.push(inputValue);
-      selectedElement.style.color = `red`;
+      selectedElement.style.color = "red";
       console.log(inputElement, zakazSousArr);
+    const parent = document.getElementById("zakazFormation");
+    console.log(parent);
+    ul = document.createElement("ul");
+    ul.textContent = inputValue;
+       parent.append(ul);
+    console.log(ul); clickIndex++;
     }
   });
   class Pizza {
@@ -80,81 +107,135 @@ function getPizza() {
       this.sous = sous;
     }
     run() {
-            const pizzaPrice = {
+      const pizzaPrice = {
         basePrice: [20, 30, 40, 50],
         ingredient1Price: [4, 6, 8, 10],
         ingredient2Price: [5, 10, 15, 20],
         sousPrice: [1, 2, 3, 4],
       };
 
-      myZakaz.addEventListener("click", (event) => {
-        console.log(
-          `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`
-        );
+      b.addEventListener("click", () => {
         const baseArrList = document
-          .querySelector(".base")
-          .querySelectorAll("li");
-        console.log(baseArrList);
-        const baseArr = [...baseArrList];
-        console.log(baseArr);
-        baseArr.forEach((li, index) => {
-                     {if (li.style.color ==="red"){console.log (index);
-            sum = sum + pizzaPrice.basePrice[index];
-             console.log(sum);}}
-             });
-         const ingredient1ArrList = document
-         .querySelector(".ingredient1")
-           .querySelectorAll("li");
-         console.log(ingredient1ArrList);
-         const ingredient1Arr = [...ingredient1ArrList];
-         console.log(ingredient1Arr);
-         ingredient1Arr.forEach((li, index) => {
-                      {if (li.style.color ==="red"){console.log (index);
-             sum = sum + pizzaPrice.ingredient1Price[index];
-              console.log(sum);}}
+        .querySelector(".base")
+        .querySelectorAll("li");
+      //console.log(baseArrList);
+      console.log(
+          `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`);
+      const baseArr = [...baseArrList];
+      console.log(baseArr);
+      
+      baseArr.forEach((li, index) => {
+        if ((li.style.color === "red") && (clickValueBase === 1) && (inputValue !== inputElement)) {
+          console.log(index);
+         // let  sumElement = pizzaPrice.basePrice[index];
+         //   totalPriceArr.push(sumElement); clickIndex++;
+          sum = sum + pizzaPrice.basePrice[index];
+          console.log(pizzaPrice.basePrice[index],sum);
+       imageNumber++;
+    img.src = `./${imageNumber}.jpg`;}
       });
-       const ingredient2ArrList = document
-           .querySelector(".ingredient2")
-           .querySelectorAll("li");
-         console.log(ingredient2ArrList);
-         const ingredient2Arr = [...ingredient2ArrList];
-         console.log(ingredient2Arr);
-         ingredient2Arr.forEach((li, index) => {
-                      {if (li.style.color ==="red"){console.log (index);
-       sum = sum + pizzaPrice.ingredient2Price[index];
-        console.log(sum);}}
+      }
+      );
+      ing1.addEventListener("click", () => {
+        const ingredient1ArrList = document
+          .querySelector(".ingredient1")
+          .querySelectorAll("li");
+        //console.log(ingredient1ArrList);
+        console.log(
+          `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`);
+        const ingredient1Arr = [...ingredient1ArrList];
+        console.log(ingredient1Arr);
+        ingredient1Arr.forEach((li, index) => {
+          if ((li.style.color === "red") && (clickValueIng1 <= 2) && (inputValue !== inputElement)) {
+            console.log(index); 
+          //  let  sumElement = pizzaPrice.ingredient1Price[index];
+           // totalPriceArr.push(sumElement); clickIndex++;
+            sum = sum + pizzaPrice.ingredient1Price[index]; 
+            console.log(pizzaPrice.ingredient1Price[index], sum);
+          if (clickValueIng1===1) {imageNumber++;
+    img.src = `./${imageNumber}.jpg`;}
+          }
         });
-           
-         const sousArrList = document
+      });
+      ing2.addEventListener("click", () => {
+        const ingredient2ArrList = document
+          .querySelector(".ingredient2")
+          .querySelectorAll("li");
+       // console.log(ingredient2ArrList);
+        console.log(
+          `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`);
+        const ingredient2Arr = [...ingredient2ArrList];
+        console.log(ingredient2Arr);
+        ingredient2Arr.forEach((li, index) => {
+          if ((li.style.color === "red") && (clickValueIng2 <= 2) && (inputValue !== inputElement)) {
+            console.log(index);
+          //  let  sumElement = pizzaPrice.ingredient2Price[index];
+          //  totalPriceArr.push(sumElement); clickIndex++;
+            sum = sum + pizzaPrice.ingredient2Price[index];
+            console.log(pizzaPrice.ingredient2Price[index], sum);
+          if (clickValueIng2===1) {imageNumber++;
+    img.src = `./${imageNumber}.jpg`;}
+  }
+        });
+      });
+      s.addEventListener("click", () => {
+        const sousArrList = document
           .querySelector(".sous")
           .querySelectorAll("li");
-         console.log(sousArrList);
-         const sousArr = [...sousArrList];
-         console.log(sousArr);
-         sousArr.forEach((li, index) => {
-                      {if (li.style.color ==="red"){console.log (index);
-             sum = sum + pizzaPrice.sousPrice[index];
-              console.log(sum);}}
-                   
+      //  console.log(sousArrList);
+        console.log(
+          `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`);
+        const sousArr = [...sousArrList];
+        console.log(sousArr);
+        sousArr.forEach((li, index) => {
+          if ((li.style.color === "red") && (clickValueSous === 1) && (inputValue !== inputElement)) {
+            console.log(index); 
+        //  let  sumElement = pizzaPrice.sousPrice[index];
+        //    totalPriceArr.push(sumElement); clickIndex++;
+            sum = sum + pizzaPrice.sousPrice[index];
+            console.log(pizzaPrice.sousPrice[index], sum);
+          imageNumber++;
+    img.src = `./${imageNumber}.jpg`;
+  }
+        });
       });
-      
-        //  const ingredient1Arr=document.querySelectorAll("ol .ingredient1");
-        //if (ingredient1Arr.forEach(item,index) === this.ingredient1){sum = sum + pizzaPrice.ingredient1Price[index];}
-        //    const ingredient2Arr=document.querySelectorAll("ol .ingredient2");
-        //if (ingredient2Arr.forEach(item,index) === this.ingredient2){sum = sum + pizzaPrice.ingredient2Price;}
-        //const sousArr=document.querySelectorAll("ol .sous");
-        //if (sousArr.forEach(item,index) === this.sous){sum = sum + pizzaPrice.sousPrice[index];}
-        //console.log(`pizzaPrice= ${sum}`);
-      });
+
+      //  const ingredient1Arr=document.querySelectorAll("ol .ingredient1");
+      //if (ingredient1Arr.forEach(item,index) === this.ingredient1){sum = sum + pizzaPrice.ingredient1Price[index];}
+      //    const ingredient2Arr=document.querySelectorAll("ol .ingredient2");
+      //if (ingredient2Arr.forEach(item,index) === this.ingredient2){sum = sum + pizzaPrice.ingredient2Price;}
+      //const sousArr=document.querySelectorAll("ol .sous");
+      //if (sousArr.forEach(item,index) === this.sous){sum = sum + pizzaPrice.sousPrice[index];}
+      //console.log(`pizzaPrice= ${sum}`);
     }
   }
-  const myPizza = new Pizza(
-    zakazBaseArr,
-    zakazIngredient1Arr,
-    zakazIngredient2Arr,
-    zakazSousArr
-  );
-  myPizza.run();
+
+const myPizza = new Pizza(
+  zakazBaseArr,
+  zakazIngredient1Arr,
+  zakazIngredient2Arr,
+  zakazSousArr
+);
+myPizza.run();
+// обработчики
+  zakazFormation.addEventListener("click", (event) => {
+        if ((event.target === ul) && (imageNumber === 5))
+    {event.target.remove();
+    //   sum = sum - totalPriceArr[clickIndex]; console.log(sum);
+    }
+    });
+button.addEventListener("click", () => {
+   if (imageNumber === 5) { imageNumber = 1; img.src = `./${imageNumber}.jpg`;
+  
+  console.log(`Pizza ${zakazBaseArr}, ${zakazIngredient1Arr}, ${zakazIngredient2Arr}, 
+     ${zakazSousArr} is ready`);
+    alert (`Заказ успешно сформирован`);
+       //    formZakaz(sum);
+  }
+   else {console.log(` Pizza is preparing`);
+  //  clickValue++;
+  }
+});
 }
 getPizza();
 // // console.log(zakazIngredient1Arr, zakazIngredient2Arr, zakazSous);
