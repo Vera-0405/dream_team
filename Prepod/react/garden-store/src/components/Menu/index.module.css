@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.active {
+    border-bottom: 1px solid gray;
+}
+
 .navigationWrapper {
     display: flex;
     background-color: #fffff1;
