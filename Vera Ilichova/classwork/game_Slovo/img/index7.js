@@ -1,4 +1,3 @@
-//const { Children } = require("react");
 //game_Slovo
 
 let clickValue = 0; // начало новой игры
