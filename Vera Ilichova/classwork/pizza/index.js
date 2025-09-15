@@ -14,13 +14,12 @@ function getPizza() {
   let inputValue = "";
   let inputElement = "";
   let sum = 0;
-  let sum_add = 0;
   let clickZakaz = "";
   const pizzaPrice = {
     basePrice: [1, 2, 3, 4],
     ingredient1Price: [1, 3, 2, 4],
     ingredient2Price: [4, 3, 2, 1],
-    sousPrice: [4, 2, 3, 1],
+    sousPrice: [4, 2, 3, 1]
   };
   //начало заказа
   const img = document.querySelector("#imgPizza>img");
@@ -28,7 +27,7 @@ function getPizza() {
   console.log(`Формирование заказа`);
   const button = document.getElementById("btn");
   // DOM
-  console.dir(document);
+  //console.dir(document);
   const b = myZakaz.children[0]; //base-osnova
   const ing1 = b.nextElementSibling; //ingredient1
   const ing2 = ing1.nextElementSibling; //ingredient2
@@ -47,13 +46,13 @@ function getPizza() {
       zakazBaseArr.push(inputValue);
       zakazBaseArrlist.push(selectedElement);
       selectedElement.style.color = "red";
-      console.log(inputElement, zakazBaseArr);
+     // console.log(inputElement, zakazBaseArr);
       const parent = document.getElementById("zakazFormation");
-      console.log(parent);
+     // console.log(parent);
       ul = document.createElement("ul");
       ul.textContent = inputValue;
       parent.append(ul);
-      console.log(ul);
+    //  console.log(ul);
     }
   });
   ing1.addEventListener("click", (event) => {
@@ -68,13 +67,13 @@ function getPizza() {
       zakazIngredient1Arr.push(inputValue);
       zakazIngredient1ArrList.push(selectedElement);
       selectedElement.style.color = "red";
-      console.log(inputElement, zakazIngredient1Arr);
+    //  console.log(inputElement, zakazIngredient1Arr);
       const parent = document.getElementById("zakazFormation");
-      console.log(parent);
+    //  console.log(parent);
       ul = document.createElement("ul");
       ul.textContent = inputValue;
       parent.append(ul);
-      console.log(ul);
+    //  console.log(ul);
     }
   });
   ing2.addEventListener("click", (event) => {
@@ -89,13 +88,13 @@ function getPizza() {
       zakazIngredient2Arr.push(inputValue);
       zakazIngredient2ArrList.push(selectedElement);
       selectedElement.style.color = "red";
-      console.log(inputElement, zakazIngredient2Arr);
+    //  console.log(inputElement, zakazIngredient2Arr);
       const parent = document.getElementById("zakazFormation");
-      console.log(parent);
+   //   console.log(parent);
       ul = document.createElement("ul");
       ul.textContent = inputValue;
       parent.append(ul);
-      console.log(ul);
+    //  console.log(ul);
     }
   });
   s.addEventListener("click", (event) => {
@@ -110,13 +109,13 @@ function getPizza() {
       zakazSousArr.push(inputValue);
       zakazSousArrList.push(selectedElement);
       selectedElement.style.color = "red";
-      console.log(inputElement, zakazSousArr);
+    //  console.log(inputElement, zakazSousArr);
       const parent = document.getElementById("zakazFormation");
-      console.log(parent);
+    //  console.log(parent);
       ul = document.createElement("ul");
       ul.textContent = inputValue;
       parent.append(ul);
-      console.log(ul);
+    //  console.log(ul);
     }
   });
   class Pizza {
@@ -137,23 +136,18 @@ function getPizza() {
           `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`
         );
         const baseArr = [...baseArrList];
-        console.log(baseArr);
+    //    console.log(baseArr);
         baseArr.forEach((li, index) => {
           if (
             li.style.color === "red" &&
             clickValueBase === 1 &&
             inputValue !== inputElement
           ) {
-            console.log(index);
-            if (clickZakaz !== "end") {
-              sum = sum + pizzaPrice.basePrice[index];
-              console.log(pizzaPrice.basePrice[index], sum);
-              img.src = `img/pizza2.jpg`;
-            } else {
-              img.src = `img/pizza1.jpg`;
-              sum = sum + pizzaPrice.basePrice[index];
-              console.log(pizzaPrice.basePrice[index], sum);
-            }
+          //  console.log(index);
+
+            sum = sum + pizzaPrice.basePrice[index];
+            //   console.log(pizzaPrice.basePrice[index], sum);
+            img.src = `img/pizza2.jpg`;
           }
         });
       });
@@ -166,31 +160,29 @@ function getPizza() {
           `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`
         );
         const ingredient1Arr = [...ingredient1ArrList];
-        console.log(ingredient1Arr);
+      //  console.log(ingredient1Arr);
         ingredient1Arr.forEach((li, index) => {
-          endZakaz();
+                    let tempValue1 = 0;
           if (
             li.style.color === "red" &&
             clickValueIng1 <= 2 &&
             inputValue !== inputElement
           ) {
-            console.log(index);
-            if (clickZakaz !== "end") {
-              if (clickValueIng1 === 1) {
-                sum = sum - pizzaPrice.ingredient1Price[index];
+          //  console.log(index);
+            if (clickValueIng1 === 1) {
+              tempValue1 = index;
+              sum = sum + pizzaPrice.ingredient1Price[tempValue1];
+            }
+
+            if (clickValueIng1 === 2) {
+              if (index === tempValue1) {
+                sum = sum - pizzaPrice.ingredient1Price[tempValue1];
               }
               sum = sum + pizzaPrice.ingredient1Price[index];
-              console.log(pizzaPrice.ingredient1Price[index], sum);
-               if (clickValueIng1 === 1) {
-                sum = sum + pizzaPrice.ingredient1Price[index];
-              }
-
-              img.src = `img/pizza3.jpg`;
-            } else {
-              img.src = `img/pizza1.jpg`;
-               sum = sum  + pizzaPrice.ingredient1Price[index];
-              console.log(pizzaPrice.ingredient1Price[index], sum);
             }
+
+            //  console.log(pizzaPrice.ingredient1Price[index], sum);
+                  img.src = `img/pizza3.jpg`;
           }
         });
       });
@@ -202,30 +194,32 @@ function getPizza() {
         console.log(
           `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`
         );
+
         const ingredient2Arr = [...ingredient2ArrList];
-        console.log(ingredient2Arr);
+      //  console.log(ingredient2Arr);
         ingredient2Arr.forEach((li, index) => {
+          let tempValue2 = 0;
           if (
             li.style.color === "red" &&
             clickValueIng2 <= 2 &&
             inputValue !== inputElement
           ) {
-            console.log(index);
-            if (clickZakaz !== "end") {
-              if (clickValueIng2 === 1) {
-                sum = sum - pizzaPrice.ingredient2Price[index];
+         //   console.log(index);
+
+            if (clickValueIng2 === 1) {
+              tempValue2 = index;
+              sum = sum + pizzaPrice.ingredient2Price[tempValue2];
+            }
+            if (clickValueIng2 === 2) {
+              if (index === tempValue2) {
+                sum = sum - pizzaPrice.ingredient2Price[tempValue2];
               }
               sum = sum + pizzaPrice.ingredient2Price[index];
-              console.log(pizzaPrice.ingredient2Price[index], sum);
-               if (clickValueIng1 === 1) {
-                sum = sum + pizzaPrice.ingredient2Price[index];
-              }
-              img.src = `img/pizza4.jpg`;
-            } else {
-              img.src = `img/pizza1.jpg`;
-                 sum = sum + pizzaPrice.ingredient2Price[index];
-              console.log(pizzaPrice.ingredient2Price[index], sum);
             }
+
+            //  console.log(pizzaPrice.ingredient2Price[index], sum);
+
+            img.src = `img/pizza4.jpg`;
           }
         });
       });
@@ -238,23 +232,17 @@ function getPizza() {
           `pizza ${this.base} , ${this.ingredient1}, ${this.ingredient2}, ${this.sous} is prepearing`
         );
         const sousArr = [...sousArrList];
-        console.log(sousArr);
+      //  console.log(sousArr);
         sousArr.forEach((li, index) => {
           if (
             li.style.color === "red" &&
             clickValueSous === 1 &&
             inputValue !== inputElement
           ) {
-            console.log(index);
-            if (clickZakaz !== "end") {
-              sum = sum + pizzaPrice.sousPrice[index];
-              console.log(pizzaPrice.sousPrice[index], sum);
-              img.src = `img/pizza5.jpg`;
-            } else {
-              img.src = `img/pizza1.jpg`;
-              sum = sum + pizzaPrice.sousPrice[index];
-              console.log(pizzaPrice.sousPrice[index], sum);
-            }
+            //console.log(index);
+            sum = sum + pizzaPrice.sousPrice[index];
+        //    console.log(pizzaPrice.sousPrice[index], sum);
+            img.src = `img/pizza5.jpg`;
           }
         });
       });
@@ -271,14 +259,14 @@ function getPizza() {
   // обработчики области заказа
   zakazFormation.addEventListener("click", (event) => {
     endZakaz();
-    console.log(clickZakaz);
+   // console.log(clickZakaz);
     if (clickZakaz !== "end") {
       selectedValue = event.target.innerText;
-      console.log(selectedValue);
+     // console.log(selectedValue);
       zakazBaseArr.some((item, index) => {
         if (item === selectedValue && clickValueBase !== 0) {
-          console.log(item);
-          console.log(selectedValue);
+         // console.log(item);
+         // console.log(selectedValue);
           zakazBaseArr[index] = "";
           console.log(zakazBaseArr[index]);
           zakazBaseArrlist[index].style.color = "blue";
@@ -289,8 +277,8 @@ function getPizza() {
       });
       zakazIngredient1Arr.some((item, index) => {
         if (item === selectedValue && clickValueIng1 !== 0) {
-          console.log(item);
-          console.log(selectedValue);
+        //  console.log(item);
+        //  console.log(selectedValue);
           zakazIngredient1Arr[index] = "";
           console.log(zakazIngredient1Arr[index]);
           zakazIngredient1ArrList[index].style.color = "blue";
@@ -301,10 +289,10 @@ function getPizza() {
       });
       zakazIngredient2Arr.some((item, index) => {
         if (item === selectedValue && clickValueIng2 !== 0) {
-          console.log(item);
-          console.log(selectedValue);
+        //  console.log(item);
+        //  console.log(selectedValue);
           zakazIngredient2Arr[index] = "";
-          console.log(zakazIngredient2Arr[index]);
+        //  console.log(zakazIngredient2Arr[index]);
           zakazIngredient2ArrList[index].style.color = "blue";
           sum = sum - pizzaPrice.ingredient2Price[index];
           event.target.remove();
@@ -313,10 +301,10 @@ function getPizza() {
       });
       zakazSousArr.some((item, index) => {
         if (item === selectedValue && clickValueSous !== 0) {
-          console.log(item);
-          console.log(selectedValue);
+        //  console.log(item);
+        //  console.log(selectedValue);
           zakazSousArr[index] = "";
-          console.log(zakazSousArr[index]);
+        //  console.log(zakazSousArr[index]);
           zakazSousArrList[index].style.color = "blue";
           sum = sum - pizzaPrice.sousPrice[index];
           event.target.remove();
@@ -342,11 +330,16 @@ function getPizza() {
   button.addEventListener("click", () => {
     endZakaz();
     if (clickZakaz === "end") {
+      img.src = `img/pizza1.jpg`;
       console.log(`Pizza ${zakazBaseArr}, ${zakazIngredient1Arr}, ${zakazIngredient2Arr}, 
      ${zakazSousArr} is ready`);
       const span = document.getElementById("span");
-      span.textContent = sum;
-      alert(`Заказ успешно сформирован`);
+      if (sum > 0) {
+        span.textContent = sum;
+        alert(`Заказ успешно сформирован`);
+      } else {
+        console.log(`ошибка: сделать новый заказ`);
+      }
     } else {
       console.log(`заказ не сформирован`);
       alert(`ошибка: сделать новый заказ`);
