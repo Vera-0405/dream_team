@@ -1,5 +1,4 @@
-// TODO:  
-// DOM, import, npm,
+
 
 // event loop
 

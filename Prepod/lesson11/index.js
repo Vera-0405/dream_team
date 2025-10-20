@@ -1,4 +1,4 @@
-// TODO: closure, this, callback
+
 
 
 // const a = 1;
@@ -20,7 +20,6 @@
 
 // test(a);
 
-// TODO: let const  in funcs
 
 // let a = 1;
 
